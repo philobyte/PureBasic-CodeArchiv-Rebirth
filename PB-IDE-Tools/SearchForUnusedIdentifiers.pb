@@ -125,7 +125,7 @@ EndIf
 AddGadgetItem(#Editor_Output, -1, "")
 lastTokenType = PBLexer::#TokenType_Newline
 While PBLexer::NextToken(*lexer)
-  readStatusInPercent = PBLexer::StringOffset(*lexer) * 100 / stringLength
+  readStatusInPercent = (PBLexer::StringOffset(*lexer) - 1) * 100 / stringLength
   SetGadgetItemText(#Editor_Output, CountGadgetItems(#Editor_Output) - 1, "Analyze code ... " +
                                                                           StrF(readStatusInPercent, 2) + "%")
   If DoEvents() = #PB_Event_CloseWindow
