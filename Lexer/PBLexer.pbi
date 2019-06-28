@@ -155,7 +155,7 @@ Module PBLexer
     Lexer::Free(*lexer)
   EndProcedure
   
-  Procedure NextToken(*lexer.Lexer::LexerStruc)
+  Procedure NextToken(*lexer)
     ; ----------------------------------------------------------------------------------------------------------------------
     ; Description:  | Determines the next token
     ; ----------------------------------------------------------------------------------------------------------------------
@@ -163,28 +163,7 @@ Module PBLexer
     ; ----------------------------------------------------------------------------------------------------------------------
     ; Return value: | #True, if a token was found, otherwise #False
     ; ----------------------------------------------------------------------------------------------------------------------
-    While Lexer::NextToken(*lexer)
-      Select Lexer::TokenType(*lexer)
-        Case Lexer::#TokenType_Unkown
-          
-          ; ----------------------------------------------------------------------------------------------------------------
-          ;- > Process the unkown token type
-          ; ----------------------------------------------------------------------------------------------------------------
-          ProcedureReturn #True
-        Case #TokenType_NewLine
-          
-          ; ----------------------------------------------------------------------------------------------------------------
-          ;- > Process the newline token type
-          ; ----------------------------------------------------------------------------------------------------------------
-          ProcedureReturn #True
-        Default
-          
-          ; --------------------------------------------------------------------------------------------------------------
-          ;- > Process all other token types
-          ; --------------------------------------------------------------------------------------------------------------
-          ProcedureReturn #True
-      EndSelect
-    Wend
+    ProcedureReturn Lexer::NextToken(*lexer)
   EndProcedure
   
   Procedure$ TokenName(*lexer)
@@ -231,7 +210,7 @@ Module PBLexer
     ProcedureReturn Lexer::TokenValueLength(*lexer)
   EndProcedure
   
-  Procedure StringOffset(*lexer.Lexer::LexerStruc, value=-1)
+  Procedure StringOffset(*lexer, value=-1)
     ; ----------------------------------------------------------------------------------------------------------------------
     ; Description:  | Returns or sets the current string offset from the lexer
     ; ----------------------------------------------------------------------------------------------------------------------
